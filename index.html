@@ -1,13 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Document</title>
 </head>
 <body>
-    <div id="container"></div>
+    <div class="container">
+        <div class="container_menu">
+            <h1>Simulador</h1>
+            <ol>
+                <li>Inscribir estudiante</li>
+                <li>Aprobar estudiante</li>
+                <li>Reprobar estudiante</li>
+                <li>Buscar estudiantes por apellidos</li>
+                <li>Comprobar inscripcion del estudiante</li>
+                <li>Salir</li>
+            </ol>
+        </div>
+        <div class="container_info">
+            <h3>Informacion:</h3>
+            <p id="porcentajeAprobado">Porcentaje de estudiantes aprobados: </p>
+            <p id="porcentajeReprobado">Porcentaje de estudiantes reprobados: </p>
+        </div>
+        <div class="container_estudiantes">
+            <h3>Estudiantes inscriptos</h3>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaI">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="container_estudiantes_reprobados">
+            <h3>Estudiantes reprobados</h3>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaR">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="container_estudiantes_aprobados">
+            <h3>Estudiantes aprobados</h3>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaA">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>

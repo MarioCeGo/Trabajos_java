@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    display: grid;
+    grid-template-areas:"menu menu menu"
+                        "info info info"
+                        "estu estuR estuA";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 100px 1fr;
+    margin: 50px;
+    
+}
+.container_menu{
+    grid-area: menu;
+}
+.container_menu ol{
+    list-style: upper-latin;
+}
+.container_info{
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container_estudiantes{
+    grid-area: estu;
+}
+.container_estudiantes_reprobados{
+    grid-area: estuR;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+.container_estudiantes_aprobados{
+    grid-area: estuA;
+}
+
+table {
+    width: 100%;
+}
+th, td {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+}

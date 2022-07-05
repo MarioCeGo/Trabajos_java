@@ -97,24 +97,61 @@ function crearEstudiante(){
     let apellido = prompt("Ingrese apellido del estudiante");
     let cedula = parseInt(prompt("Ingrese cedula del estudiante, sin puntos ni guion"));
     sistema.agregarEstudiante(new Estudiante(nombre, apellido, cedula));
+    mostrarEstudiantes();
+    mostrarEstudiantesReprobados();
+    mostrarPorcentaje()
 }
 function aprobarEstudiante(){
     // EA = Estudiante Aprobado
     let nombreEA = prompt("Ingrese el nombre del estudiante aprobado").toUpperCase();
     let apellidoEA = prompt("Ingrese el apellido del estudiante aprobado").toUpperCase();
     sistema.aprobarEstudiante(nombreEA, apellidoEA);
+    mostrarEstudiantesAprobados();
+    mostrarEstudiantesReprobados();
+    mostrarPorcentaje()
 }
 function reprobarEstudiante(){
     // ER = Estudiante Reprobado
     let nombreER = prompt("Ingrese el nombre del estudiante reprobado").toUpperCase();
     let apellidoER = prompt("Ingrese el apellido del estudiante reprobado").toUpperCase();
     sistema.reprobarEstudiante(nombreER, apellidoER);
+    mostrarEstudiantesAprobados();
+    mostrarEstudiantesReprobados();
+    mostrarPorcentaje()
+}
+function mostrarEstudiantes(){
+    let listaEstudiantes = sistema.listaEstudiantes;
+    let tabla = document.getElementById("tablaI");
+    mostrarEnTabla(listaEstudiantes,tabla);
+
+}
+function mostrarEstudiantesAprobados(){
+    let listaEstudiantesAprobados = sistema.estudiantesAprobados;
+    let tabla = document.getElementById("tablaA");
+    mostrarEnTabla(listaEstudiantesAprobados, tabla);
+}
+function mostrarEstudiantesReprobados(){
+    let listaEstudiantesReprobados = sistema.estudiantesReprobados;
+    let tabla = document.getElementById("tablaR");
+    mostrarEnTabla(listaEstudiantesReprobados, tabla);
+}
+function mostrarEnTabla(lista, tabla){
+    tabla.innerHTML = "";
+    for(let elem of lista){
+        let fila = tabla.insertRow();
+        let celda1 = fila.insertCell();
+        let celda2 = fila.insertCell();
+        let celda3 = fila.insertCell();
+        celda1.innerHTML= elem.nombre;
+        celda2.innerHTML= elem.apellido;
+        celda3.innerHTML= elem.cedula;
+    }
+    
 }
 
-console.log("INICIO \n A. Inscribir estudiante \n B. Aprobar estudiante \n C. Reprobar estudiante \n D. Mostrar todos los estudiantes inscripto \n E. Mostrar estudiante aprobados \n F. Mostrar estudiantes reprobado \n G. Buscar estudiantes por apellidos \n H. Comprobar que el estudiante este inscripto/a \n I. Porcentaje de estudiantes aprobados \n J. Porcentaje de estudiantes reprobados \n K. Limpiar consola \n ESC. Salir");
 let option = prompt("Eliga una opcion").toUpperCase();
 
-while(option != "ESC"){
+while(option != "I"){
     switch(option){
         case "A":
             crearEstudiante();
@@ -162,29 +199,15 @@ while(option != "ESC"){
             }
             option = "HOME";   
             break;
-        case "I":
-            if(sistema.porcentajeEstudiantesAprobados() == 0){
-                console.log("Ningun estudiante aprobo");
-            }else{
-                console.log("El " + sistema.porcentajeEstudiantesAprobados() + "% de los estudiante aprobo");
-            }
-            option = "HOME";
-            break;
-        case "J":
-            if(sistema.porcentajeEstudiantesReprobados() == 0){
-                console.log("Ningun estudiante reprobo");
-            }else{
-                console.log("El " + sistema.porcentajeEstudiantesReprobados() + "% de los estudiante reprobo");
-            }
-            option = "HOME";
-            break;
-        case "K":
-            console.clear();
-            console.log("INICIO \n A. Inscribir estudiante \n B. Aprobar estudiante \n C. Reprobar estudiante \n D. Mostrar todos los estudiantes inscripto \n E. Mostrar estudiante aprobados \n F. Mostrar estudiantes reprobado \n G. Buscar estudiantes por apellidos \n H. Comprobar que el estudiante este inscripto/a \n I. Porcentaje de estudiantes aprobados \n J. Porcentaje de estudiantes reprobados \n K. Limpiar consola \n ESC. Salir");
-            option = "HOME";
-            break;
         case "HOME":
             option = prompt("Eliga una opcion").toUpperCase();
             break;
     }
+}
+
+function mostrarPorcentaje(){
+    let porcentajeAprobado = document.getElementById("porcentajeAprobado");
+    let porcentajeReprobado = document.getElementById("porcentajeReprobado");
+    porcentajeAprobado.innerHTML = "Porcentaje de estudiantes aprobados: " + sistema.porcentajeEstudiantesAprobados();
+    porcentajeReprobado.innerHTML = "Porcentaje de estudiantes reprobados: " + sistema.porcentajeEstudiantesReprobados();
 }

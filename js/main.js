@@ -8,38 +8,6 @@ class Sistema{
         this.listaEstudiantes.push(estudiante);
         this.estudiantesReprobados.push(estudiante);
     }
-    mostrarEstudiantes(){
-        console.log("--- LISTA DE ESTUDIANTES ---");
-        let cont = 1;
-        for(let elem of this.listaEstudiantes){
-            console.log(cont + ") " + "\n Nombre: " + elem.nombre + "\n Apellido: " + elem.apellido + "\n Cedula: " + elem.cedula);
-            cont ++;
-        }
-    }
-    mostrarEstudiantesAprobados(){
-        let cont = 1;
-        console.log("--- ESTUDIANTES APROBADOS ---");
-        if(this.estudiantesAprobados != 0){
-            for(let elem of this.estudiantesAprobados){
-                console.log(cont + ") " + "\n Nombre: " + elem.nombre + "\n Apellido: " + elem.apellido);
-                cont ++;
-            }
-        }else{
-            console.log("NINGUN ESTUDIANTE APROBO");
-        }
-    }
-    mostrarEstudiantesReprobados(){
-        let cont = 1;
-        console.log("--- ESTUDIANTES REPROBADOS ---");
-        if(this.estudiantesReprobados != 0){
-            for(let elem of this.estudiantesReprobados){
-                console.log(cont + ") " + "\n Nombre: " + elem.nombre + "\n Apellido: " + elem.apellido);
-                cont ++;
-            }
-        }else{
-            console.log("NINGUN ESTUDIANTE REPROBO");
-        }
-    }
     aprobarEstudiante(nombre, apellido){
         let aux = true;
         for(let elem of this.estudiantesReprobados){
@@ -148,10 +116,36 @@ function mostrarEnTabla(lista, tabla){
     }
     
 }
+function buscarXApellido(){
+    let apellido = prompt("Ingrese el apellido del estudiante a buscar");
+    if(sistema.buscarEstudianteXApellido(apellido)[0] === undefined){
+        console.log("No se encontraron estudiantes con ese apellido");
+    }else{
+        console.log("--- ESTUDIANTES ENCONTRADOS ---");
+        for(let elem of sistema.buscarEstudianteXApellido(apellido)){
+            console.log(elem.nombre + " " + elem.apellido );
+        }
+    }    
+}
+function comprobarInscripcion(){
+    let cedula = parseInt(prompt("Ingrese cedula del estudiante a buscar sin punto ni guion"));
+    if(sistema.buscarEstudianteXCedula(cedula) === undefined){
+        console.log("Estudiante no esa inscripto/a");
+    }else{
+        console.log("Estudiante encontrado/a")
+        console.log(sistema.buscarEstudianteXCedula(cedula).nombre + " " + sistema.buscarEstudianteXCedula(cedula).apellido );
+    }
+}
+function mostrarPorcentaje(){
+    let porcentajeAprobado = document.getElementById("porcentajeAprobado");
+    let porcentajeReprobado = document.getElementById("porcentajeReprobado");
+    porcentajeAprobado.innerHTML = "Porcentaje de estudiantes aprobados: " + sistema.porcentajeEstudiantesAprobados();
+    porcentajeReprobado.innerHTML = "Porcentaje de estudiantes reprobados: " + sistema.porcentajeEstudiantesReprobados();
+}
 
 let option = prompt("Eliga una opcion").toUpperCase();
 
-while(option != "I"){
+while(option != "F"){
     switch(option){
         case "A":
             crearEstudiante();
@@ -166,37 +160,11 @@ while(option != "I"){
             option = "HOME";
             break;
         case "D":
-            sistema.mostrarEstudiantes();
+            buscarXApellido();
             option = "HOME";
             break;
         case "E":
-            sistema.mostrarEstudiantesAprobados();
-            option = "HOME";
-            break;
-        case "F":
-            sistema.mostrarEstudiantesReprobados();
-            option = "HOME";
-            break;
-        case "G":
-            let apellido = prompt("Ingrese el apellido del estudiante a buscar");
-            if(sistema.buscarEstudianteXApellido(apellido)[0] === undefined){
-                console.log("No se encontraron estudiantes con ese apellido");
-            }else{
-                console.log("--- ESTUDIANTES ENCONTRADOS ---");
-                for(let elem of sistema.buscarEstudianteXApellido(apellido)){
-                    console.log(elem.nombre + " " + elem.apellido );
-                }
-            }
-            option = "HOME";
-            break;
-        case "H":
-            let cedula = parseInt(prompt("Ingrese cedula del estudiante a buscar sin punto ni guion"));
-            if(sistema.buscarEstudianteXCedula(cedula) === undefined){
-                console.log("Estudiante no esa inscripto/a");
-            }else{
-                console.log("Estudiante encontrado/a")
-                console.log(sistema.buscarEstudianteXCedula(cedula).nombre + " " + sistema.buscarEstudianteXCedula(cedula).apellido );
-            }
+            comprobarInscripcion();
             option = "HOME";   
             break;
         case "HOME":
@@ -205,9 +173,3 @@ while(option != "I"){
     }
 }
 
-function mostrarPorcentaje(){
-    let porcentajeAprobado = document.getElementById("porcentajeAprobado");
-    let porcentajeReprobado = document.getElementById("porcentajeReprobado");
-    porcentajeAprobado.innerHTML = "Porcentaje de estudiantes aprobados: " + sistema.porcentajeEstudiantesAprobados();
-    porcentajeReprobado.innerHTML = "Porcentaje de estudiantes reprobados: " + sistema.porcentajeEstudiantesReprobados();
-}

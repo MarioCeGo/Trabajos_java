@@ -11,14 +11,34 @@
     <div class="container">
         <div class="container_menu">
             <h1>Simulador</h1>
-            <ol>
-                <li>Inscribir estudiante</li>
-                <li>Aprobar estudiante</li>
-                <li>Reprobar estudiante</li>
-                <li>Buscar estudiantes por apellidos</li>
-                <li>Comprobar inscripcion del estudiante</li>
-                <li>Salir</li>
-            </ol>
+        </div>
+        <div class="inscribir-estudiante">
+            <h2>Inscribir estudiante</h2>
+            <form action="" id="formularioInscripcion">
+                <label for="nombreEstudianteI">Nombre:</label>
+                <input type="text" id="nombreEstudianteI" required>
+                <label for="apellido-estudianteI">Apellido:</label>
+                <input type="text" id="apellido-estudianteI" required>
+                <label for="cedula-estudianteI">Cedula:</label>
+                <input type="number" name="" id="cedula-estudianteI" placeholder="Cedula sin punto ni guion" required>
+                <input type="button" value="Inscribir" id="inscribir">
+            </form>
+            <p id="avisoInscripcion"></p>
+        </div>
+        <div class="aprobar-reprobar-borrar">
+            <h2>Reproba, aprobar o borrar estudiante</h2>
+            <div>
+                <select name="" id="estudiantes">
+                    <option value="0" disabled selected>Seleccione estudiante</option>
+                </select>
+                <button id="botonAOR">Aprobar o Reprobar</button>
+                <button id="botonBorrar">Borrar</button>
+                <p id="avisoARB"></p>
+                <div class="indicadores">
+                    <p class="aprobado">Aprobado</p>
+                    <p class="reprobado">Reprobado</p>
+                </div>
+            </div>
         </div>
         <div class="container_info">
             <h3>Informacion:</h3>
@@ -70,6 +90,8 @@
             </table>
         </div>
     </div>
+    <script src="js/class.js"></script>
+    <script src="js/funciones.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

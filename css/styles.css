@@ -9,17 +9,35 @@ html{
 .container{
     display: grid;
     grid-template-areas:"menu menu menu"
+                        "inscribir inscribir inscribir"
+                        "aR aR aR"
                         "info info info"
                         "estu estuR estuA";
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 100px 1fr;
+    grid-template-rows: 50px 100px 150px 100px auto;
     margin: 50px;
 }
 .container_menu{
     grid-area: menu;
 }
-.container_menu ol{
-    list-style: upper-latin;
+.inscribir-estudiante{
+    grid-area: inscribir;
+}
+.inscribir-estudiante p {
+    margin-top: 15px;
+}
+.aprobar-reprobar-borrar{
+    grid-area: aR;
+}
+.aprobar-reprobar-borrar h2{
+    margin-bottom: 10px;
+}
+.aprobar-reprobar-borrar p{
+    margin-top: 15px;
+}
+.indicadores{
+    width: 100px;
+    text-align: center;
 }
 .container_info{
     grid-area: info;
@@ -46,4 +64,11 @@ th, td {
     width: 25%;
     text-align: left;
     vertical-align: top;
+}
+.reprobado{
+    background-color: red;
+}
+
+.aprobado{
+    background-color: greenyellow;
 }

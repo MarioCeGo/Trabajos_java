@@ -1,33 +1,18 @@
-function crearEstudiante(){
-    let aviso = document.getElementById("avisoInscripcion");
-    let form = document.getElementById("formularioInscripcion");
-    if(validarEstudiante() && form.reportValidity()){
-        let nombre = document.getElementById("nombreEstudianteI").value;
-        let apellido = document.getElementById("apellido-estudianteI").value;
-        let cedula = document.getElementById("cedula-estudianteI").value;
-        
-        sistema.agregarEstudiante(new Estudiante(primeraMayuscula(nombre), primeraMayuscula(apellido), cedula));
-        actualizarDatos();
-        form.reset();
-        aviso.innerHTML = "Estudiante inscripto con EXITO!";
-    }else if(!validarEstudiante()){
-        aviso.innerHTML = "El estudiante YA esta inscripto";
-    }
-}
+const modal = document.getElementById("modal");
 
 function cargarEstudianteACombo(){
-    let combo = document.getElementById("estudiantes");
+    let combo = document.getElementById("estudiantesInscripto");
     combo.innerHTML = ` <option value="0" disabled selected>Seleccione estudiante</option>`
     for(let elem of sistema.listaEstudiantes){
         if(elem.aprobado){
             let option = document.createElement("option");
-            option.innerHTML = `${elem.nombre} | ${elem.apellido} | ${elem.cedula}`;
+            option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
             option.value = elem.cedula;
             option.className = "aprobado"
             combo.append(option);
         }else{
             let option = document.createElement("option");
-            option.innerHTML = `${elem.nombre} | ${elem.apellido} | ${elem.cedula}`;
+            option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
             option.value = elem.cedula;
             option.className = "reprobado"
             combo.append(option);
@@ -35,53 +20,48 @@ function cargarEstudianteACombo(){
     }
 }
 
-function aprobarOReprobar(){
-    let combo = document.getElementById("estudiantes");
-    let avisoARB = document.getElementById("avisoARB");
-    if(combo.value != 0){
-        for (let elem of sistema.listaEstudiantes){
-            if(elem.cedula == combo.value){
-                if(elem.aprobado){
-                    elem.aprobado = false;
-                    actualizarDatos();
-                    avisoARB.innerHTML = `${elem.nombre} ${elem.apellido} reprobó el curso`;
-                }else{
-                    elem.aprobado = true;
-                    actualizarDatos();
-                    avisoARB.innerHTML = `${elem.nombre} ${elem.apellido} aprobó el curso`;
-                }
-            }
-        }
-    }else{
-        avisoARB.innerHTML = "Seleccione un o una estudiante!"
-    }
-}
 
-function borrarEstudiante(){
-    let combo = document.getElementById("estudiantes");
-    let avisoARB = document.getElementById("avisoARB");
-    if(combo.value != 0){
-        for (let elem of sistema.listaEstudiantes){ 
-            if(elem.cedula == combo.value){
-                avisoARB.innerHTML = "Presione ENTER para confirar, o cualquier tecla para cancelar";
-                document.addEventListener("keydown", confirmarBorrado);
-            }
-        }
-    }else{
-        avisoARB.innerHTML = "Seleccione un o una estudiante!";
-    }
-}
+
+
 
 function confirmarBorrado(event){
     if(event.key === "Enter"){
-        sistema.eliminarEstudiante(document.getElementById("estudiantes").value);
-        document.getElementById("avisoARB").innerHTML = "Se borro el estudiante";
+        sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
         actualizarDatos();
+        guardarEstudiantes();
     }else{
-        document.getElementById("avisoARB").innerHTML = "Se aborto la tarea";
     }
     document.removeEventListener("keydown", confirmarBorrado);
+    modal.innerHTML = "";
+    modal.className = "";
 }
+
+function ventanaInfo(tipo){
+    modal.className = "modal";
+    if(tipo == "ADVERTENCIAGRAVE"){
+        modal.innerHTML = `
+        <div class="modal-info modal-info-advertenciaGrave">
+            <img src="../images/modal/advertencia_grave.png" alt="">
+            <h2>Advertencia</h2>
+            <p>Esta a punto de borrar un estudiante, presione <span>ENTER</span> para confirmar, o cualquier otra tecla para abortar.</p>
+        </div>`        
+    }else if(tipo == "ADVERTENCIA"){
+        modal.innerHTML = `
+        <div class="modal-info modal-info-advertencia">
+            <img src="../images/modal/advertencia.png" alt="">
+            <h2>Advertencia</h2>
+            <p>Esta a punto de borrar un estudiante, presione <span>ENTER</span> para confirmar, o cualquier otra tecla para abortar.</p>
+            <button id="btnCerrarModal" class="btn">Ok</button>
+        </div>`
+        document.getElementById("btnCerrarModal").onclick = () => {cerrarModal()};
+    }
+    
+}
+function cerrarModal(){
+    modal.innerHTML = "";
+    modal.className = "";
+}
+
 
 function actualizarDatos(){
     cargarEstudianteACombo();
@@ -91,47 +71,37 @@ function actualizarDatos(){
 
 function validarEstudiante(){
     let aux = false;
-    if(sistema.buscarEstudianteXCedula(document.getElementById("cedula-estudianteI").value) === undefined){
+    if(sistema.buscarEstudianteXCedula(document.getElementById("cedulaEstudianteInscripcion").value) === undefined){
         aux = true;
     }
     return aux
 }
 
 function primeraMayuscula(texto){
-    let aux = texto[0].toUpperCase();
-    for(let i = 1 ; i < texto.length ; i++){
-        aux += texto[i];
+    let aux = "";
+    if(texto != ""){
+        aux = texto[0].toUpperCase();
+        for(let i = 1 ; i < texto.length ; i++){
+            aux += texto[i];        
+        }
     }
     return aux
 }
 
-function crearTabla(tabla, elem){
-    let fila = tabla.insertRow();
-    let celda1 = fila.insertCell();
-    let celda2 = fila.insertCell();
-    let celda3 = fila.insertCell();
-    celda1.innerHTML= elem.nombre;
-    celda2.innerHTML= elem.apellido;
-    celda3.innerHTML= elem.cedula;
-}
 
-function mostrarDatosEnTabla(){
-    document.getElementById("tablaA").innerHTML = "";
-    document.getElementById("tablaR").innerHTML = "";
-    document.getElementById("tablaI").innerHTML = "";
-    for(let elem of sistema.listaEstudiantes){
-        if(elem.aprobado){
-            crearTabla(document.getElementById("tablaA"), elem);
-            crearTabla(document.getElementById("tablaI"), elem);
-        }else{
-            crearTabla(document.getElementById("tablaR"), elem);
-            crearTabla(document.getElementById("tablaI"), elem);
-        }
-    }
-}
 
 function mostrarPorcentaje(){
     document.getElementById("porcentajeAprobado").innerHTML = "Porcentaje de estudiantes aprobados: " + sistema.porcentajeEstudiantes()[0] + "%";
     document.getElementById("porcentajeReprobado").innerHTML = "Porcentaje de estudiantes reprobados: " + sistema.porcentajeEstudiantes()[1] + "%";
+}
+
+function guardarEstudiantes(){
+    localStorage.setItem("listaEstudiantes", JSON.stringify(sistema.listaEstudiantes))
+}
+function obtenerEstudiantes(){
+    let estudiantes = localStorage.getItem("listaEstudiantes");
+    if(estudiantes != null){
+        sistema.listaEstudiantes = JSON.parse(estudiantes);
+    }
 }
 

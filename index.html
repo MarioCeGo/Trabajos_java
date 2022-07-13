@@ -5,90 +5,111 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Document</title>
+    <title>Simulador</title>
 </head>
 <body>
-    <div class="container">
-        <div class="container_menu">
+    <div class="container-index">
+        <div class="nav">
             <h1>Simulador</h1>
+            <nav>
+                <a href="">Inicio</a>
+                <a href="pages/inscripcion.html">Inscripción</a>
+                <a href="pages/examen.html">Examen</a>
+                <a href="pages/administracion.html">Administración</a>
+            </nav>
         </div>
-        <div class="inscribir-estudiante">
-            <h2>Inscribir estudiante</h2>
-            <form action="" id="formularioInscripcion">
-                <label for="nombreEstudianteI">Nombre:</label>
-                <input type="text" id="nombreEstudianteI" required>
-                <label for="apellido-estudianteI">Apellido:</label>
-                <input type="text" id="apellido-estudianteI" required>
-                <label for="cedula-estudianteI">Cedula:</label>
-                <input type="number" name="" id="cedula-estudianteI" placeholder="Cedula sin punto ni guion" required>
-                <input type="button" value="Inscribir" id="inscribir">
-            </form>
-            <p id="avisoInscripcion"></p>
-        </div>
-        <div class="aprobar-reprobar-borrar">
-            <h2>Reproba, aprobar o borrar estudiante</h2>
-            <div>
-                <select name="" id="estudiantes">
-                    <option value="0" disabled selected>Seleccione estudiante</option>
-                </select>
-                <button id="botonAOR">Aprobar o Reprobar</button>
-                <button id="botonBorrar">Borrar</button>
-                <p id="avisoARB"></p>
-                <div class="indicadores">
-                    <p class="aprobado">Aprobado</p>
-                    <p class="reprobado">Reprobado</p>
-                </div>
+        <div class="banner-inicio">
+            <div class="banner-inicio-info">
+                <h1>Simulador</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro recusandae dolorem tempora inventore. Est neque et quos? Fugiat, optio sapiente! Quia mollitia, repellendus laudantium atque ad aliquam cupiditate corporis est?</p>
             </div>
         </div>
-        <div class="container_info">
-            <h3>Informacion:</h3>
-            <p id="porcentajeAprobado">Porcentaje de estudiantes aprobados: </p>
-            <p id="porcentajeReprobado">Porcentaje de estudiantes reprobados: </p>
+        <div class="container-index-info">
+            <div class="box-info">
+                <img src="images/estudiantes.png" alt="">
+                <h3>Inscribe</h3>
+                <p>A tus alumnos, registra sus actividades y ten control de su evolución.</p>
+            </div>
+            <div class="box-info">
+                <img src="images/prueba.png" alt="">
+                <h3>Examen</h3>
+                <p>Toma evaluaciones y deja que el sistema autocorriga las preguntas. (Proximamente)</p>
+            </div>
+            <div class="box-info">
+                <img src="images/administra.png" alt="">
+                <h3>Administra</h3>
+                <p>Da pase, reprueba, edita o elimina a los alumnos de la manera más facil.</p>
+            </div>
         </div>
-        <div class="container_estudiantes">
-            <h3>Estudiantes inscriptos</h3>
-            <table >
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Cedula</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaI">
+        <div class="banner-inscripcion">
+            <div class="banner-inscripcion-info">
+                <p>Tener a tus estudiantes un solo lugar nunca fue tan facil, empieza ahora!</p>
+            </div>
+        </div>
+        <div class="container-index-info">
+            <div class="box-info">
+                <img src="images/estudiantes.png" alt="">
+                <h3>Inscribe</h3>
+                <p>A tus alumnos, registra sus actividades y ten control de su evolución.</p>
+            </div>
+            <div class="box-info">
+                <img src="images/prueba.png" alt="">
+                <h3>Examen</h3>
+                <p>Toma evaluaciones y deja que el sistema autocorriga las preguntas. (Proximamente)</p>
+            </div>
+            <div class="box-info">
+                <img src="images/administra.png" alt="">
+                <h3>Administra</h3>
+                <p>Da pase, reprueba, edita o elimina a los alumnos de la manera más facil.</p>
+            </div>
+        </div>
+        <div class="banner-examen">
+            <div class="banner-examen-info">
+                <p>Tener a tus estudiantes un solo lugar nunca fue tan facil, empieza ahora!</p>
+            </div>
+        </div>
+        <div class="container-index-info">
+            <div class="box-info">
+                <img src="images/estudiantes.png" alt="">
+                <h3>Inscribe</h3>
+                <p>A tus alumnos, registra sus actividades y ten control de su evolución.</p>
+            </div>
+            <div class="box-info">
+                <img src="images/prueba.png" alt="">
+                <h3>Examen</h3>
+                <p>Toma evaluaciones y deja que el sistema autocorriga las preguntas. (Proximamente)</p>
+            </div>
+            <div class="box-info">
+                <img src="images/administra.png" alt="">
+                <h3>Administra</h3>
+                <p>Da pase, reprueba, edita o elimina a los alumnos de la manera más facil.</p>
+            </div>
+        </div>
+        <div class="banner-administracion">
+            <div class="banner-administracion-info">
+                <p>Tener a tus estudiantes un solo lugar nunca fue tan facil, empieza ahora!</p>
+            </div>
+        </div>
+        <div class="container-index-info">
+            <div class="box-info">
+                <img src="images/estudiantes.png" alt="">
+                <h3>Inscribe</h3>
+                <p>A tus alumnos, registra sus actividades y ten control de su evolución.</p>
+            </div>
+            <div class="box-info">
+                <img src="images/prueba.png" alt="">
+                <h3>Examen</h3>
+                <p>Toma evaluaciones y deja que el sistema autocorriga las preguntas. (Proximamente)</p>
+            </div>
+            <div class="box-info">
+                <img src="images/administra.png" alt="">
+                <h3>Administra</h3>
+                <p>Da pase, reprueba, edita o elimina a los alumnos de la manera más facil.</p>
+            </div>
+        </div>
+        <footer>
 
-                </tbody>
-            </table>
-        </div>
-        <div class="container_estudiantes_reprobados">
-            <h3>Estudiantes reprobados</h3>
-            <table >
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Cedula</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaR">
-
-                </tbody>
-            </table>
-        </div>
-        <div class="container_estudiantes_aprobados">
-            <h3>Estudiantes aprobados</h3>
-            <table >
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Cedula</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaA">
-                </tbody>
-            </table>
-        </div>
+        </footer>
     </div>
     <script src="js/class.js"></script>
     <script src="js/funciones.js"></script>

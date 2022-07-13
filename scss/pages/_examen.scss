@@ -1,0 +1,19 @@
+@import "../funciones";
+@import "../variables";
+
+.container-exam{
+    &-info{
+        @include paddingLR(150px);
+        &-img{
+            height: 500px;
+            background-image: url("../images/trabajando.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h1{
+            margin-top: 50px;
+            margin-bottom: 15px;
+        }
+    }
+}

@@ -32,9 +32,11 @@ class Sistema{
     }
 }
 class Estudiante{
-    constructor(nombre, apellido, cedula){
-        this.nombre = nombre;
-        this.apellido = apellido;
+    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, cedula){
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
         this.cedula = cedula;
         this.id = sistema.listaEstudiantes.length; 
         this.aprobado = false;

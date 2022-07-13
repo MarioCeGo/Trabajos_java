@@ -1,0 +1,50 @@
+@import "../funciones";
+@import "../variables";
+
+.container-admin{
+    &-estudiantes{
+        display: grid;
+        grid-template-areas: "arb contAdminInfo"
+                             "ira ira";
+        grid-template-rows: 200px auto;
+        @include paddingLR(150px);
+        margin-top: 50px;
+    }
+    &-arb{
+        grid-area: arb;
+        &-input{
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+            select{
+                width: 300px;
+                height: 30px;
+            }
+            &-btn{
+                margin-top: 15px;
+            }
+        }
+    }
+    &-info{
+        grid-area: contAdminInfo;
+        &-estudiante-IRA{
+            grid-area: ira;
+            display: grid;
+            grid-template-areas: "tablaEI tablaER tablaEA";
+            grid-template-columns: 1fr 1fr 1fr;
+            text-align: center;
+            h3{
+                margin-bottom: 50px;
+            }
+            table{
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+    }
+}
+.border{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}

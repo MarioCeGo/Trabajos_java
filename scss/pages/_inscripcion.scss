@@ -61,9 +61,6 @@
                 padding-left: 15px;
                 font-size: 16px;
             }
-            input[type=button]{
-                margin-top: 50px;
-            }
         }
         &-info{
             grid-area: estudiantesI;
@@ -85,5 +82,11 @@
 }
 .formInscripcionApellidos{
     display: flex;
+}
+.formularioInscripcion-btn{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 

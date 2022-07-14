@@ -1,9 +1,10 @@
 .container-index{
     &-info{
-        margin-top: 50px;
+        height: 300px;
         @include paddingLR(150px);
         display: flex;
         justify-content: space-evenly;
+        align-items: center;
     }
 }
 .banner-inicio{
@@ -28,7 +29,7 @@
 }
 .banner-inscripcion{
     height: 500px;
-    background-image: url("../images/img_inscripcion_2.jpg");
+    background-image: url("../images/banner_inscripcion.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,7 +39,6 @@
         @include sizesWH(100%, 100%);
         @include paddingLR(150px);
         background: linear-gradient(90deg,$color_5, $sombra_2);
-        //background-color: $sombra_2;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -56,7 +56,6 @@
         @include sizesWH(100%, 100%);
         @include paddingLR(150px);
         background: linear-gradient(270deg,$color_5, $sombra_2);
-        //background-color: $sombra_2;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -74,7 +73,6 @@
         @include sizesWH(100%, 100%);
         @include paddingLR(150px);
         background: linear-gradient(90deg,$color_5, $sombra_2);
-        //background-color: $sombra_2;
         display: flex;
         flex-direction: column;
         justify-content: center;

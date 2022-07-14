@@ -5,7 +5,6 @@ document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudian
 
 function aprobarOReprobar(){
     let combo = document.getElementById("estudiantesInscripto");
-    let avisoARB = document.getElementById("avisoARB");
     let btn = document.getElementById("botonAOREstudiante");
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){
@@ -14,17 +13,17 @@ function aprobarOReprobar(){
                     elem.aprobado = false;
                     guardarEstudiantes();
                     actualizarDatos();
-                    avisoARB.innerHTML = `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`;
+                    document.getElementById("avisoARB").innerHTML = `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`;
                 }else{
                     elem.aprobado = true;
                     guardarEstudiantes();
                     actualizarDatos();
-                    avisoARB.innerHTML = `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`;
+                    document.getElementById("avisoARB").innerHTML = `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`;
                 }
             }
         }
     }else{
-        avisoARB.innerHTML = "Seleccione un o una estudiante!"
+        document.getElementById("avisoARB").innerHTML = "Seleccione un o una estudiante!";
     }
     btn.innerHTML = "Aprobar o Reprobar";
     btn.className = "btn";
@@ -50,10 +49,10 @@ function btnAR(){
             if(elem.cedula == combo.value){
                 if(elem.aprobado){
                     btn.innerHTML = "Reprobar";
-                    btn.className = "btn btn-reprobar"
+                    btn.className = "btn btn-reprobar";
                 }else{
                     btn.innerHTML = "Aprobar";
-                    btn.className = "btn btn-aprobar"
+                    btn.className = "btn btn-aprobar";
                 }
             }
         }

@@ -56,6 +56,19 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
             color: white;
         }
     }
+    &-tertiary{
+        background: none;
+        color: black;
+        width: auto;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include paddingLR(5px);
+        &:hover{
+            text-decoration: underline;
+        }
+    }
     &-aprobar{
         background-color: #4CAF50;
     }
@@ -129,4 +142,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         }
     }
     
+}
+.ocultar{
+    display: none;
 }

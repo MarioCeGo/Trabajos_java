@@ -31,11 +31,15 @@
                     <input type="text" id="segundoApellidoEstudianteInscripcion" required placeholder="Segundo apellido*">
                 </div>
                 <div class="formInscripcionDatos">
-                    <input type="number" name="" id="cedulaEstudianteInscripcion" placeholder="Cedula sin punto ni guion" required>
+                    <input type="number" name="" id="cedulaEstudianteInscripcion" placeholder="Cedula sin punto ni guion*" required>
                     <label for="fechaNacimientoEstudianteInscripcion">Fecha nacimiento*</label>
                     <input type="date" name="" id="fechaNacimientoEstudianteInscripcion">
                 </div>
-                <input type="button" value="INSCRIBIR" id="inscribirEstudiante" class="btn">
+                <div class="formularioInscripcion-btn">
+                    <input type="button" value="INSCRIBIR" id="inscribirEstudiante" class="btn">
+                    <a href="administracion.html" class="btn btn-tertiary ocultar" id="btnFormAE">Administrar estudiantes>></a>
+                </div>
+                
             </form>
             <div class="container-inscripcion-estudiante-info">
                 <h2>Estudiantes inscriptos</h2>

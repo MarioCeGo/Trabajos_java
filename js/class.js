@@ -38,7 +38,6 @@ class Estudiante{
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
-        this.id = sistema.listaEstudiantes.length; 
         this.aprobado = false;
     }
 }

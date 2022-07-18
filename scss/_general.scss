@@ -7,6 +7,7 @@
 }
 html{
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 a{
     text-decoration: none;
@@ -50,6 +51,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         border: 2px solid $color_4;
         color: black;
         transition: all 500ms;
+        &-cuenta{
+            background: none;
+            border: 2px solid $color_4;
+            color: black;
+            transition: all 500ms;
+        }
         &:hover{
             background-color: #f44336;
             border: none;
@@ -139,6 +146,58 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         }
         p{
             text-align: center;
+        }
+        &-cuenta{
+            display: grid;
+            grid-template-areas:"modalTitle"
+                                "modalForm";
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 100%;
+            position: relative;
+            form{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                input[type=email], input[type=password]{
+                    @include sizesWH(100%, 36px);
+                    border-radius: 15px;
+                    border: 1px solid rgba(0, 0, 0, 0.342);
+                    padding-left: 10px;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                input{
+                    margin: 5px;
+                }
+            }
+            h2{
+                font-size: 36px;
+            }
+            button{
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin: 15px;
+                transition: all 500ms;
+                //background: none;
+                background: url("../images/modal/close.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                @include sizesWH(16px,16px);
+                border: none;
+                // display: flex;
+                // align-items: center;
+                // justify-content: center;
+                cursor: pointer;
+                &:hover{
+                    transform: rotate(90deg);
+                }
+            }
         }
     }
     

@@ -1,9 +1,13 @@
 class Sistema{
     constructor(){
         this.listaEstudiantes = [];
+        this.cuentasProfesores = [];
     }
     agregarEstudiante(estudiante){
         this.listaEstudiantes.push(estudiante);
+    }
+    agregarCuentaProfesor(profesor){
+        this.cuentasProfesores.push(profesor)
     }
     eliminarEstudiante(cedula){
         for(let elem of sistema.listaEstudiantes){
@@ -14,6 +18,15 @@ class Sistema{
     }
     buscarEstudianteXCedula(cedula){
         return this.listaEstudiantes.find((estudiante) => estudiante.cedula === cedula);
+    }
+    validarCuentaExistente(email){
+        return this.cuentasProfesores.find((profesor) => profesor.email === email);
+    }
+    validarInicioSesion(email, password){
+        if(this.cuentasProfesores.length > 0){
+            return this.cuentasProfesores.find((profesor) => (profesor.email === email) && (profesor.password === password));
+        }
+        return false
     }
     porcentajeEstudiantes(){
         let porcentajes = [];
@@ -31,14 +44,24 @@ class Sistema{
         return porcentajes;
     }
 }
+
 class Estudiante{
-    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, cedula){
+    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, fechaNacimiento){
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
+        this.fechaNacimiento = fechaNacimiento;
         this.aprobado = false;
+    }
+}
+
+class Profesor{
+    constructor(email, password){
+        this.email = email;
+        this.password = password;
+        this.listaEstudiantes;
     }
 }
 

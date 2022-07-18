@@ -13,7 +13,7 @@ function crearEstudiante(){
         let cedula = document.getElementById("cedulaEstudianteInscripcion").value;
         let fechaNacimiento = document.getElementById("fechaNacimientoEstudianteInscripcion").value;
         
-        sistema.agregarEstudiante(new Estudiante(primeraMayuscula(primerNombre), primeraMayuscula(segundoNombre), primeraMayuscula(primerApellido), primeraMayuscula(segundoApellido), cedula));
+        sistema.agregarEstudiante(new Estudiante(primeraMayuscula(primerNombre), primeraMayuscula(segundoNombre), primeraMayuscula(primerApellido), primeraMayuscula(segundoApellido), cedula, fechaNacimiento));
         sistema.listaEstudiantes.length>0 ? (document.getElementById("btnFormAE").className = "btn btn-tertiary") : false ;
 
         listaEstudiantesInscripto();
@@ -29,7 +29,7 @@ function listaEstudiantesInscripto(){
     document.getElementById("listaEstudiantesInscripto").innerHTML = "";
     for(let elem of sistema.listaEstudiantes){
         let li = document.createElement("li");
-        li.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
+        li.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula} | ${elem.fechaNacimiento}`;
         document.getElementById("listaEstudiantesInscripto").append(li);
     }
 }

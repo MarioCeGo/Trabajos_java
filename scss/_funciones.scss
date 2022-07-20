@@ -1,9 +1,0 @@
-@mixin paddingLR ($value) {
-    padding-left: $value;
-    padding-right: $value;
-}
-
-@mixin sizesWH ($width, $height) {
-    width: $width;
-    height: $height;
-}

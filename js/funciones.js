@@ -82,6 +82,5 @@ function guardarEstudiantes(){
 }
 
 function obtenerEstudiantes(){
-    let estudiantes = JSON.parse(localStorage.getItem("listaEstudiantes")) || [];
-    sistema.listaEstudiantes = (estudiantes);
+    sistema.listaEstudiantes = ((JSON.parse(localStorage.getItem("listaEstudiantes")) || []));
 }

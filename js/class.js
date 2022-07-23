@@ -28,6 +28,9 @@ class Sistema{
         }
         return false
     }
+    verificarSesionAbierta(){
+        
+    }
     porcentajeEstudiantes(){
         let porcentajes = [];
         let contA = 0;
@@ -58,9 +61,14 @@ class Estudiante{
 }
 
 class Profesor{
-    constructor(email, password){
+    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, email, password, fechaNacimiento){
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
         this.email = email;
         this.password = password;
+        this.fechaNacimiento = fechaNacimiento;
         this.listaEstudiantes;
     }
 }

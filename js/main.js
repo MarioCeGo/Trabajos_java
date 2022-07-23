@@ -8,15 +8,18 @@ function crearCuenta(){
         let email = document.getElementById("emailCrearIniciarCuenta").value;
         let password = document.getElementById("passwordCrearIniciarCuenta").value;
 
-        let profesor = new Profesor(email, password);
+        let profesor = new Profesor("","","","",email, password,"");
         sistema.agregarCuentaProfesor(profesor);
         cerrarModal();
+        guardarCuentasProfesores();
+        window.location.href="../pages/configCuenta.html";
     }else if(!validarCuentaExistente){
-        console.log(!validarCuentaExistente)
         alert("La cuenta ya existe");
     }
 
 }
+
+
 
 function iniciarSesion(){
     let form = document.getElementById("formCrearAbrirCuenta");
@@ -24,7 +27,7 @@ function iniciarSesion(){
     let password = document.getElementById("passwordCrearIniciarCuenta").value;
     let validacionInicio = (sistema.validarInicioSesion(email, password) != undefined ) ? true : false;
     if(form.reportValidity() && validacionInicio){
-        inicioSesion.push(email, password, true)
+        inicioSesion.push(email, password, true);
         cerrarModal();
     }else if(!validacionInicio) {
         alert("Algo salio mal mi amigo");
@@ -83,7 +86,7 @@ function cerrarModal(){
     modal.className = "";
 }
 
-function sesionIniciada(inicioSesion){
+function estadoSesion(inicioSesion){
     if(inicioSesion[2]){
 
     }else{

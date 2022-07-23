@@ -28,6 +28,7 @@ function confirmarBorrado(){
 
 function ventanaInfo(tipo){
     modal.className = "modal";
+    
     if(tipo == "ADVERTENCIAGRAVE"){
         modal.innerHTML = `
         <div class="modal-info modal-info-advertencia">

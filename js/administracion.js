@@ -33,10 +33,7 @@ function borrarEstudiante(){
     let combo = document.getElementById("estudiantesInscripto");
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){ 
-            if(elem.cedula == combo.value){
-                ventanaInfo("ADVERTENCIAGRAVE");
-                document.addEventListener("keydown", confirmarBorrado);
-            }
+            elem.cedula == combo.value ? ventanaInfo("ADVERTENCIAGRAVE"): false ;
         }
     }
 }

@@ -1,3 +1,5 @@
+const inicioSesion = []; // [usuario, contraseña, estado], estado = cuenta iniciada
+
 function crearCuenta(){
     let form = document.getElementById("formCrearAbrirCuenta");
     let validarCuentaExistente = (sistema.validarCuentaExistente(document.getElementById("emailCrearIniciarCuenta").value) === undefined ) ? true : false ;
@@ -18,13 +20,13 @@ function crearCuenta(){
 
 function iniciarSesion(){
     let form = document.getElementById("formCrearAbrirCuenta");
-    let verificarInicio = (sistema.validarInicioSesion((document.getElementById("emailCrearIniciarCuenta").value), (document.getElementById("passwordCrearIniciarCuenta").value)) != undefined ) ? true : false ;
-    
-    if(verificarInicio && form.reportValidity()){
-        let email = document.getElementById("emailCrearIniciarCuenta").value;
-        let password = document.getElementById("passwordCrearIniciarCuenta").value;
+    let email = document.getElementById("emailCrearIniciarCuenta").value;
+    let password = document.getElementById("passwordCrearIniciarCuenta").value;
+    let validacionInicio = (sistema.validarInicioSesion(email, password) != undefined ) ? true : false;
+    if(form.reportValidity() && validacionInicio){
+        inicioSesion.push(email, password, true)
         cerrarModal();
-    }else if(!verificarInicio){
+    }else if(!validacionInicio) {
         alert("Algo salio mal mi amigo");
     }
 
@@ -39,7 +41,12 @@ function ventanaInfo(tipo){
             <img src="../images/modal/advertencia_grave.png" alt="">
             <h2>Advertencia</h2>
             <p>Esta a punto de borrar un estudiante, presione <span>ENTER</span> para confirmar, o cualquier otra tecla para abortar.</p>
+            <button id="btnConfirmBorrar" class="btn">Borrar</button>
+            <button id="btnCerrarModal" class="btn btn-secundary">Cancelar</button>
         </div>`;
+
+        document.getElementById("btnConfirmBorrar").onclick = () => {confirmarBorrado()};
+        document.getElementById("btnCerrarModal").onclick = () => {cerrarModal()};
 
     }else if(tipo == "ADVERTENCIA"){
 
@@ -74,4 +81,12 @@ function ventanaInfo(tipo){
 function cerrarModal(){
     modal.innerHTML = "";
     modal.className = "";
+}
+
+function sesionIniciada(inicioSesion){
+    if(inicioSesion[2]){
+
+    }else{
+        
+    }
 }

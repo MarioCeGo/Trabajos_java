@@ -23,13 +23,10 @@ function cargarEstudianteACombo(){
     }
 }
 
-function confirmarBorrado(event){
-    if(event.key === "Enter"){
-        sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
-        actualizarDatos();
-        guardarEstudiantes();
-    }
-    document.removeEventListener("keydown", confirmarBorrado);
+function confirmarBorrado(){
+    sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
+    actualizarDatos();
+    guardarEstudiantes();
     cerrarModal();
 }
 

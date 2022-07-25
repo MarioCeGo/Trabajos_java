@@ -1,6 +1,7 @@
 class Sistema{
     constructor(){
         this.listaEstudiantes = [];
+        this.listaPruebas = [];
     }
     agregarEstudiante(estudiante){
         this.listaEstudiantes.push(estudiante);
@@ -39,6 +40,19 @@ class Estudiante{
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
         this.aprobado = false;
+    }
+}
+class Prueba{
+    constructor(examen, test){
+        this.examen = examen;
+        this.test = test;
+    }
+}
+class Examen{
+    constructor(preguntas, respuestas, puntos){
+        this.preguntas = preguntas;
+        this.respuestas = respuestas;
+        this.puntos = puntos;
     }
 }
 

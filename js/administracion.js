@@ -13,17 +13,38 @@ function aprobarOReprobar(){
                     elem.aprobado = false;
                     guardarEstudiantes();
                     actualizarDatos();
-                    document.getElementById("avisoARB").innerHTML = `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`;
+                    Toastify({
+                        text: `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`,
+                        duration: 2000,
+                        gravity: "bottom",
+                        position: "right",
+                        style: {
+                            background: "#f44336"
+                        }
+                    }).showToast();
                 }else{
                     elem.aprobado = true;
                     guardarEstudiantes();
                     actualizarDatos();
-                    document.getElementById("avisoARB").innerHTML = `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`;
+                    Toastify({
+                        text: `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`,
+                        duration: 2000,
+                        gravity: "bottom",
+                        position: "right",
+                        style: {
+                            background: "#4CAF50"
+                        }
+                    }).showToast();
                 }
             }
         }
     }else{
-        document.getElementById("avisoARB").innerHTML = "Seleccione un o una estudiante!";
+        Toastify({
+            text: "Seleccione estudiante!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();
     }
     btn.innerHTML = "Aprobar o Reprobar";
     btn.className = "btn";

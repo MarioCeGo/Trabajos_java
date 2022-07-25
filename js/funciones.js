@@ -19,25 +19,27 @@ function cargarEstudianteACombo(){
     }
 }
 
-function confirmarBorrado(event){
-    if(event.key === "Enter"){
-        sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
-        actualizarDatos();
-        guardarEstudiantes();
-    }
-    document.removeEventListener("keydown", confirmarBorrado);
+function confirmarBorrado(){
+    sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
+    actualizarDatos();
+    guardarEstudiantes();
     cerrarModal();
 }
 
 function ventanaInfo(tipo){
     modal.className = "modal";
+    
     if(tipo == "ADVERTENCIAGRAVE"){
         modal.innerHTML = `
-        <div class="modal-info modal-info-advertenciaGrave">
+        <div class="modal-info modal-info-advertencia">
             <img src="../images/modal/advertencia_grave.png" alt="">
             <h2>Advertencia</h2>
             <p>Esta a punto de borrar un estudiante, presione <span>ENTER</span> para confirmar, o cualquier otra tecla para abortar.</p>
+            <button id="btnConfirmarBorrado" class="btn">Borrar</button>
+            <button id="btnCerrarModal" class="btn">Cancelar</button>
         </div>`;
+        document.getElementById("btnConfirmarBorrado").onclick = () => {confirmarBorrado()};
+        document.getElementById("btnCerrarModal").onclick = () => {cerrarModal()};
     }else if(tipo == "ADVERTENCIA"){
         modal.innerHTML = `
         <div class="modal-info modal-info-advertencia">
@@ -82,6 +84,5 @@ function guardarEstudiantes(){
 }
 
 function obtenerEstudiantes(){
-    let estudiantes = JSON.parse(localStorage.getItem("listaEstudiantes")) || [];
-    sistema.listaEstudiantes = (estudiantes);
+    sistema.listaEstudiantes = ((JSON.parse(localStorage.getItem("listaEstudiantes")) || []));
 }

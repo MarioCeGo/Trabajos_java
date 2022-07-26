@@ -33,27 +33,16 @@ class Sistema{
     }
 }
 class Estudiante{
-    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, cedula){
+    constructor(primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, fechaNacimiento){
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
+        this.fechaNacimiento = fechaNacimiento;
         this.aprobado = false;
     }
 }
-class Prueba{
-    constructor(examen, test){
-        this.examen = examen;
-        this.test = test;
-    }
-}
-class Examen{
-    constructor(preguntas, respuestas, puntos){
-        this.preguntas = preguntas;
-        this.respuestas = respuestas;
-        this.puntos = puntos;
-    }
-}
+
 
 const sistema = new Sistema();

@@ -35,9 +35,7 @@ function aprobarOReprobar(){
 function borrarEstudiante(){
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){ 
-            if(elem.cedula == combo.value){
-                ventanaInfo("ADVERTENCIAGRAVE");
-            }
+            elem.cedula == combo.value ? ventanaInfo("ADVERTENCIAGRAVE"): false ;
         }
     }
 }

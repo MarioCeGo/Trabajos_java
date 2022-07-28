@@ -1,9 +1,10 @@
 const modal = document.getElementById("modal");
 
+
 document.getElementById("crearAbrirCuenta").onclick = () => {ventanaInfo("CUENTA")}
 
 function cargarEstudianteACombo(){
-    document.getElementById("estudiantesInscripto").innerHTML = ` <option value="0" disabled selected>Seleccione estudiante</option>`
+    combo.innerHTML = ` <option value="0" disabled selected>Seleccione estudiante</option>`
     for(let elem of sistema.listaEstudiantes){
 
         if(elem.aprobado){
@@ -11,20 +12,20 @@ function cargarEstudianteACombo(){
             option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
             option.value = elem.cedula;
             option.className = "aprobado";
-            document.getElementById("estudiantesInscripto").append(option);
+            combo.appendChild(option);
 
         }else{
             let option = document.createElement("option");
             option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
             option.value = elem.cedula;
             option.className = "reprobado";
-            document.getElementById("estudiantesInscripto").append(option);
+            combo.appendChild(option);
         }
     }
 }
 
 function confirmarBorrado(){
-    sistema.eliminarEstudiante(document.getElementById("estudiantesInscripto").value);
+    sistema.eliminarEstudiante(combo.value);
     actualizarDatos();
     guardarEstudiantes();
     cerrarModal();

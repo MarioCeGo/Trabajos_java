@@ -1,7 +1,4 @@
 window.onload = () =>{inicioAdministracion()}
-document.getElementById("botonAOREstudiante").onclick = () => {aprobarOReprobar()};
-document.getElementById("estudiantesInscripto").onclick = () => {statusEnCombo()};
-document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudiante()};
 
 // Variables
 const combo = document.getElementById("estudiantesInscripto");
@@ -81,11 +78,12 @@ function mostrarDatosEnTabla(){
     }
 }
 
-
-
 function inicioAdministracion(){
     obtenerEstudiantes();
     cargarEstudianteACombo();
     mostrarDatosEnTabla();
     mostrarPorcentaje();
+    document.getElementById("botonAOREstudiante").onclick = () => {aprobarOReprobar()};
+    document.getElementById("estudiantesInscripto").onclick = () => {statusEnCombo()};
+    document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudiante()};
 }

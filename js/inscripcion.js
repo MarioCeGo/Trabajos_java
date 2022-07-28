@@ -44,4 +44,3 @@ function inicioInscripcion(){
     sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
     document.getElementById("inscribirEstudiante").onclick = () => {crearEstudiante()};
 }
-

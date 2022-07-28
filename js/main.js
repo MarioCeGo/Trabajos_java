@@ -19,8 +19,6 @@ function crearCuenta(){
 
 }
 
-
-
 function iniciarSesion(){
     let form = document.getElementById("formCrearAbrirCuenta");
     let email = document.getElementById("emailCrearIniciarCuenta").value;

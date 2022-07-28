@@ -74,6 +74,38 @@ function primeraMayuscula(texto){
     return aux;
 }
 
+function mostrarToastify(tipo){
+    if(tipo == "REPROBO"){
+        Toastify({
+            text: `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`,
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#f44336"
+            }
+        }).showToast();
+    }else if(tipo == "APROBO"){
+        Toastify({
+            text: `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`,
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#4CAF50"
+            }
+        }).showToast();        
+    }else if(tipo == "ASE"){
+        //ASE -> Aviso Seleccione Estudiante
+        Toastify({
+            text: "Seleccione estudiante!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();
+    }
+}
+
 function mostrarPorcentaje(){
     document.getElementById("porcentajeAprobado").innerHTML = "Porcentaje de estudiantes aprobados: " + sistema.porcentajeEstudiantes()[0] + "%";
     document.getElementById("porcentajeReprobado").innerHTML = "Porcentaje de estudiantes reprobados: " + sistema.porcentajeEstudiantes()[1] + "%";

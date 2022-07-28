@@ -1,11 +1,14 @@
 window.onload = () =>{inicioAdministracion()}
 document.getElementById("botonAOREstudiante").onclick = () => {aprobarOReprobar()};
-document.getElementById("estudiantesInscripto").onclick = () => {btnAR()};
+document.getElementById("estudiantesInscripto").onclick = () => {statusEnCombo()};
 document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudiante()};
 
+// Variables
+const combo = document.getElementById("estudiantesInscripto");
+const btnAR = document.getElementById("botonAOREstudiante");
+
+// Funciones
 function aprobarOReprobar(){
-    let combo = document.getElementById("estudiantesInscripto");
-    let btn = document.getElementById("botonAOREstudiante");
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){
             if(elem.cedula == combo.value){
@@ -13,45 +16,23 @@ function aprobarOReprobar(){
                     elem.aprobado = false;
                     guardarEstudiantes();
                     actualizarDatos();
-                    Toastify({
-                        text: `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`,
-                        duration: 2000,
-                        gravity: "bottom",
-                        position: "right",
-                        style: {
-                            background: "#f44336"
-                        }
-                    }).showToast();
+                    mostrarToastify("REPROBO");
                 }else{
                     elem.aprobado = true;
                     guardarEstudiantes();
                     actualizarDatos();
-                    Toastify({
-                        text: `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`,
-                        duration: 2000,
-                        gravity: "bottom",
-                        position: "right",
-                        style: {
-                            background: "#4CAF50"
-                        }
-                    }).showToast();
+                    mostrarToastify("APROBO");
                 }
             }
         }
     }else{
-        Toastify({
-            text: "Seleccione estudiante!",
-            duration: 2000,
-            gravity: "bottom",
-            position: "right"
-        }).showToast();
+        mostrarToastify("ASE");
     }
-    btn.innerHTML = "Aprobar o Reprobar";
-    btn.className = "btn";
+    btnAR.innerHTML = "Aprobar o Reprobar";
+    btnAR.className = "btn";
 }
 
 function borrarEstudiante(){
-    let combo = document.getElementById("estudiantesInscripto");
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){ 
             if(elem.cedula == combo.value){
@@ -61,18 +42,16 @@ function borrarEstudiante(){
     }
 }
 
-function btnAR(){
-    let combo = document.getElementById("estudiantesInscripto");
-    let btn = document.getElementById("botonAOREstudiante");
+function statusEnCombo(){
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){
             if(elem.cedula == combo.value){
                 if(elem.aprobado){
-                    btn.innerHTML = "Reprobar";
-                    btn.className = "btn btn-reprobar";
+                    btnAR.innerHTML = "Reprobar";
+                    btnAR.className = "btn btn-reprobar";
                 }else{
-                    btn.innerHTML = "Aprobar";
-                    btn.className = "btn btn-aprobar";
+                    btnAR.innerHTML = "Aprobar";
+                    btnAR.className = "btn btn-aprobar";
                 }
             }
         }
@@ -103,6 +82,8 @@ function mostrarDatosEnTabla(){
         }
     }
 }
+
+
 
 function inicioAdministracion(){
     obtenerEstudiantes();

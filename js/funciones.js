@@ -1,41 +1,41 @@
 const modal = document.getElementById("modal");
 
-
 document.getElementById("crearAbrirCuenta").onclick = () => {ventanaInfo("CUENTA")}
 
-function cargarEstudianteACombo(){
+function cargarEstudianteACombo(estudiantes){
     combo.innerHTML = ` <option value="0" disabled selected>Seleccione estudiante</option>`
-    for(let elem of sistema.listaEstudiantes){
-
-        if(elem.aprobado){
-            let option = document.createElement("option");
-            option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
-            option.value = elem.cedula;
-            option.className = "aprobado";
-            combo.appendChild(option);
-
-        }else{
-            let option = document.createElement("option");
-            option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
-            option.value = elem.cedula;
-            option.className = "reprobado";
-            combo.appendChild(option);
-        }
+    for(let elem of estudiantes){
+        let option = document.createElement("option");
+        option.innerHTML = `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula}`;
+        option.value = elem.id;
+        combo.appendChild(option);
     }
 }
 
-function confirmarBorrado(){
-    sistema.eliminarEstudiante(combo.value);
-    actualizarDatos();
-    guardarEstudiantes();
-    cerrarModal();
+
+
+function confirmarBorrado(dato){
+    fetch(`https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes/${dato}`,{
+        method: "DELETE",
+    })
+    .then(()=>{
+        actualizarDatos();
+        guardarEstudiantes();
+        cerrarModal();
+        btnAR.innerHTML = "Aprobar o Reprobar";
+        btnAR.className = "btn";
+    })
+    
 }
 
-function actualizarDatos(){
-    cargarEstudianteACombo();
-    mostrarPorcentaje();
-    mostrarDatosEnTabla();   
-}
+// async function actualizarDatos(){
+//     let resp = await fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes");
+//     let data = await resp.json();
+//     sistema.listaEstudiantes = [...data].sort((a,b) => {return (a.primerApellido).localeCompare(b.primerApellido)});
+//     cargarEstudianteACombo();
+//     mostrarPorcentaje();
+//     mostrarEstudiantesEnLista();  
+// }
 
 function primeraMayuscula(texto){
     let aux = "";
@@ -48,10 +48,10 @@ function primeraMayuscula(texto){
     return aux;
 }
 
-function mostrarToastify(tipo){
+function mostrarToastify(tipo, estudiante){
     if(tipo == "REPROBO"){
         Toastify({
-            text: `${elem.primerNombre} ${elem.primerApellido} reprobó el curso`,
+            text: `${estudiante.primerNombre} ${estudiante.primerApellido} reprobó el curso`,
             duration: 2000,
             gravity: "bottom",
             position: "right",
@@ -61,7 +61,7 @@ function mostrarToastify(tipo){
         }).showToast();
     }else if(tipo == "APROBO"){
         Toastify({
-            text: `${elem.primerNombre} ${elem.primerApellido} aprobó el curso`,
+            text: `${estudiante.primerNombre} ${estudiante.primerApellido} aprobó el curso`,
             duration: 2000,
             gravity: "bottom",
             position: "right",
@@ -77,6 +77,13 @@ function mostrarToastify(tipo){
             gravity: "bottom",
             position: "right"
         }).showToast();
+    }else if(tipo == "INSCRIPTO"){
+        Toastify({
+            text: "Estudiante inscripto!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();
     }
 }
 
@@ -86,9 +93,26 @@ function mostrarPorcentaje(){
 }
 
 function guardarEstudiantes(){
-    localStorage.setItem("listaEstudiantes", JSON.stringify(sistema.listaEstudiantes));
+    sessionStorage.setItem("listaEstudiantes", JSON.stringify(sistema.listaEstudiantes));
 }
 
 function obtenerEstudiantes(){
-    sistema.listaEstudiantes = ((JSON.parse(localStorage.getItem("listaEstudiantes")) || []));
+    if(inicioSesion[inicioSesion.length-1]){
+
+    }else{
+        sistema.listaEstudiantes = ((JSON.parse(sessionStorage.getItem("listaEstudiantes")) || []));
+    }
+}
+
+
+
+function actualizarDatos(){
+    if(inicioSesion[inicioSesion.length-1]){
+        console.log(inicioSesion[inicioSesion.length-2]);
+        //cargarEstudianteACombo(inicioSesion[inicioSesion.length-2]);
+    }else{
+        //cargarEstudianteACombo(sistema.listaEstudiantes);
+    }
+    mostrarPorcentaje();
+    mostrarEstudiantesEnLista();  
 }

@@ -1,7 +1,5 @@
 window.onload = () =>{inicioInscripcion()};
 
-//Variables
-
 const form = document.getElementById("formularioInscripcion");
 const primerNombre = document.getElementById("primerNombreEstudianteInscripcion");
 const segundoNombre = document.getElementById("segundoNombreEstudianteInscripcion");
@@ -12,22 +10,19 @@ const fechaNacimiento = document.getElementById("fechaNacimientoEstudianteInscri
 const listaEstudiantesInscripto = document.getElementById("listaEstudiantesInscripto");
 const btnFormAE = document.getElementById("btnFormAE");
 
-//Funciones
-
-function crearEstudiante(){
-    let validarEstudiante = (sistema.buscarEstudianteXCedula(document.getElementById("cedulaEstudianteInscripcion").value) === undefined ) ? true : false ;
-    if(validarEstudiante && form.reportValidity()){
-        sistema.agregarEstudiante(new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value));
-        sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
-
-        mostrarEstudiantesInscripto();
-        guardarEstudiantes();
-        form.reset();
+// function crearEstudiante(){
+//     let validarEstudiante = (sistema.buscarEstudianteXCedula(cedula.value) === undefined ) ? true : false;
+//     if(validarEstudiante && form.reportValidity()){
+//         let estudiante = new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value);
+//         sistema.agregarEstudiante(estudiante);
+//         registrarEstudiante(estudiante);
+//         sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
+//         form.reset();
         
-    }else if(!validarEstudiante){
-        ventanaInfo("ADVERTENCIA");
-    }
-}
+//     }else if(!validarEstudiante){
+//         ventanaInfo("ADVERTENCIA");
+//     }
+// }
 
 function mostrarEstudiantesInscripto(){
     listaEstudiantesInscripto.innerHTML = "";
@@ -39,8 +34,38 @@ function mostrarEstudiantesInscripto(){
 }
 
 function inicioInscripcion(){
-    obtenerEstudiantes();
+    // let resp = await fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes");
+    // let data = await resp.json();
+    // sistema.listaEstudiantes = [...data].sort((a,b) => {return (a.primerApellido).localeCompare(b.primerApellido)});
+    obtenerSesionTemporal();
+    inicioSesion[inicioSesion.length-1] ? "" : obtenerEstudiantes();
     mostrarEstudiantesInscripto();
+    obtenerSesionTemporal();
     sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
     document.getElementById("inscribirEstudiante").onclick = () => {crearEstudiante()};
+}
+
+
+
+
+
+
+function crearEstudiante(){
+    let validarEstudiante = (sistema.buscarEstudianteXCedula(cedula.value) === undefined ) ? true : false;
+    if(validarEstudiante && form.reportValidity()){
+        let estudiante = new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value);
+        if(inicioSesion[inicioSesion.length-1]){
+            inicioSesion[inicioSesion.length-2].push(estudiante);
+            registrarEstudianteProfesor();
+        }else{
+            sistema.agregarEstudiante(estudiante);
+            //listaEstudiantesInscripto();
+            guardarEstudiantes();
+            mostrarEstudiantesInscripto();
+            sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;          
+        }   
+        form.reset();
+    }else if(!validarEstudiante){
+        ventanaInfo("ADVERTENCIA");
+    }
 }

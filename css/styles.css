@@ -167,6 +167,30 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .ocultar {
   display: none; }
 
+.lista {
+  width: 100%; }
+  .lista-administrarEstudiante {
+    list-style: none; }
+    .lista-administrarEstudiante li {
+      border-bottom: 0.5px solid black;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%; }
+
+.status-estudiante {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%; }
+
+.aprobado {
+  background-color: #4CAF50; }
+
+.reprobado {
+  background-color: #f44336; }
+
 .container-index-info {
   height: 300px;
   padding-left: 150px;
@@ -363,11 +387,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .container-admin-info {
   grid-area: contAdminInfo; }
   .container-admin-info-estudiante-IRA {
-    grid-area: ira;
-    display: grid;
-    grid-template-areas: "tablaEI tablaER tablaEA";
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: center; }
+    grid-area: ira; }
     .container-admin-info-estudiante-IRA h3 {
       margin-bottom: 50px; }
     .container-admin-info-estudiante-IRA table {

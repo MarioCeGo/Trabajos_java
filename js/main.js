@@ -1,4 +1,4 @@
-const inicioSesion = []; // [usuario, contraseña, estado], estado = cuenta iniciada
+
 
 function crearCuenta(){
     let form = document.getElementById("formCrearAbrirCuenta");
@@ -10,9 +10,7 @@ function crearCuenta(){
 
         let profesor = new Profesor("","","","",email, password,"");
         sistema.agregarCuentaProfesor(profesor);
-        cerrarModal();
-        guardarCuentasProfesores();
-        window.location.href="../pages/configCuenta.html";
+        registrarProfesor(profesor);
     }else if(!validarCuentaExistente){
         alert("La cuenta ya existe");
     }
@@ -23,17 +21,15 @@ function iniciarSesion(){
     let form = document.getElementById("formCrearAbrirCuenta");
     let email = document.getElementById("emailCrearIniciarCuenta").value;
     let password = document.getElementById("passwordCrearIniciarCuenta").value;
-    let validacionInicio = (sistema.validarInicioSesion(email, password) != undefined ) ? true : false;
-    if(form.reportValidity() && validacionInicio){
-        inicioSesion.push(email, password, true);
+    if(form.reportValidity()){
+        iniciarCuentaProfesore(email, password);
         cerrarModal();
     }else if(!validacionInicio) {
         alert("Algo salio mal mi amigo");
     }
-
 }
 
-function ventanaInfo(tipo){
+function ventanaInfo(tipo, dato){
     modal.className = "modal";
     if(tipo == "ADVERTENCIAGRAVE"){
 
@@ -46,7 +42,7 @@ function ventanaInfo(tipo){
             <button id="btnCerrarModal" class="btn btn-secundary">Cancelar</button>
         </div>`;
 
-        document.getElementById("btnConfirmBorrar").onclick = () => {confirmarBorrado()};
+        document.getElementById("btnConfirmBorrar").onclick = () => {confirmarBorrado(dato)};
         document.getElementById("btnCerrarModal").onclick = () => {cerrarModal()};
 
     }else if(tipo == "ADVERTENCIA"){
@@ -84,10 +80,3 @@ function cerrarModal(){
     modal.className = "";
 }
 
-function estadoSesion(inicioSesion){
-    if(inicioSesion[2]){
-
-    }else{
-        
-    }
-}

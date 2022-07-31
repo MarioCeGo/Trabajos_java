@@ -1,27 +1,53 @@
 window.onload = () =>{inicioAdministracion()}
 
-// Variables
 const combo = document.getElementById("estudiantesInscripto");
 const btnAR = document.getElementById("botonAOREstudiante");
 
-// Funciones
+// function aprobarOReprobar(){
+//     let estudiante;
+//     if(combo.value != 0){
+//         for (let elem of sistema.listaEstudiantes){
+//             if(elem.cedula == combo.value){
+//                 elem.status ? elem.status = false : elem.status = true;
+//                 estudiante = elem;
+//             }
+//         }
+//         fetch(`https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes/${estudiante.id}`,{
+//                         method: "PUT",
+//                         headers: { 'Content-Type': 'application/json' },
+//                         body: JSON.stringify({ status: estudiante.status })
+//                     })
+//                     .then(()=>{
+//                         actualizarDatosSesion();
+//                         actualizarDatos();
+//                         estudiante.status ? mostrarToastify("APROBO", estudiante) : mostrarToastify("REPROBO", estudiante);
+//                     })
+//     }else{
+//         mostrarToastify("ASE");
+//     }
+//     btnAR.innerHTML = "Aprobar o Reprobar";
+//     btnAR.className = "btn";
+// }
+
 function aprobarOReprobar(){
+    let estudiante;
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){
             if(elem.cedula == combo.value){
-                if(elem.aprobado){
-                    elem.aprobado = false;
-                    guardarEstudiantes();
-                    actualizarDatos();
-                    mostrarToastify("REPROBO");
-                }else{
-                    elem.aprobado = true;
-                    guardarEstudiantes();
-                    actualizarDatos();
-                    mostrarToastify("APROBO");
-                }
+                elem.status ? elem.status = false : elem.status = true;
+                estudiante = elem;
             }
         }
+        fetch(`https://62e2a74fb54fc209b87df028.mockapi.io/profesores/${inicioSesion[0]}`,{
+                        method: "PUT",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ status: estudiante.status })
+                    })
+                    .then(()=>{
+                        actualizarDatosSesion();
+                        actualizarDatos();
+                        estudiante.status ? mostrarToastify("APROBO", estudiante) : mostrarToastify("REPROBO", estudiante);
+                    })
     }else{
         mostrarToastify("ASE");
     }
@@ -32,8 +58,10 @@ function aprobarOReprobar(){
 function borrarEstudiante(){
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){ 
-            elem.cedula == combo.value ? ventanaInfo("ADVERTENCIAGRAVE"): false ;
+            elem.cedula == combo.value ? ventanaInfo("ADVERTENCIAGRAVE",elem.id): false ;
         }
+    }else{
+        mostrarToastify("ASE");
     }
 }
 
@@ -41,7 +69,7 @@ function statusEnCombo(){
     if(combo.value != 0){
         for (let elem of sistema.listaEstudiantes){
             if(elem.cedula == combo.value){
-                if(elem.aprobado){
+                if(elem.status){
                     btnAR.innerHTML = "Reprobar";
                     btnAR.className = "btn btn-reprobar";
                 }else{
@@ -53,37 +81,41 @@ function statusEnCombo(){
     }
 }
 
-function crearTabla(tabla, elem){
-    let fila = tabla.insertRow();
-    let celda1 = fila.insertCell();
-    let celda2 = fila.insertCell();
-    let celda3 = fila.insertCell();
-    celda1.innerHTML= `${elem.primerNombre} ${elem.segundoNombre}`;
-    celda2.innerHTML= `${elem.primerApellido} ${elem.segundoApellido}`;
-    celda3.innerHTML= elem.cedula;
-}
-
-function mostrarDatosEnTabla(){
-    document.getElementById("tablaEstudiantesAprobados").innerHTML = "";
-    document.getElementById("tablaEstudiantesReprobados").innerHTML = "";
-    document.getElementById("tablaEstudiantesInscripto").innerHTML = "";
-    for(let elem of sistema.listaEstudiantes){
-        if(elem.aprobado){
-            crearTabla(document.getElementById("tablaEstudiantesAprobados"), elem);
-            crearTabla(document.getElementById("tablaEstudiantesInscripto"), elem);
-        }else{
-            crearTabla(document.getElementById("tablaEstudiantesReprobados"), elem);
-            crearTabla(document.getElementById("tablaEstudiantesInscripto"), elem);
-        }
+function mostrarEstudiantesEnLista(estudiantes){
+    let lista = document.getElementById("listaAdministrarEstudiante");
+    lista.innerHTML = "";
+    let statusAOR;
+    for(let elem of estudiantes){
+        elem.status ? statusAOR = "aprobado" : statusAOR = "reprobado";
+        let li = document.createElement("li");
+        li.id = elem.cedula
+        li.innerHTML = 
+        `${elem.primerNombre} ${elem.segundoNombre} ${elem.primerApellido} ${elem.segundoApellido} | ${elem.cedula} <div class="status-estudiante ${statusAOR}"></div>`;
+        lista.appendChild(li);
     }
 }
 
 function inicioAdministracion(){
-    obtenerEstudiantes();
-    cargarEstudianteACombo();
-    mostrarDatosEnTabla();
+    obtenerSesionTemporal();
+    cargarEstudianteACombo(inicioSesion[inicioSesion.length-2]);
+    mostrarEstudiantesEnLista(inicioSesion[inicioSesion.length-2]);
     mostrarPorcentaje();
     document.getElementById("botonAOREstudiante").onclick = () => {aprobarOReprobar()};
     document.getElementById("estudiantesInscripto").onclick = () => {statusEnCombo()};
     document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudiante()};
 }
+
+// async function inicioAdministracion(){
+//     let resp = await fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes");
+//     let data = await resp.json();
+//     sistema.listaEstudiantes = [...data].sort((a,b) => {return (a.primerApellido).localeCompare(b.primerApellido)});
+//     //cargarEstudianteACombo();
+//     cargarEstudianteACombo(inicioSesion[inicioSesion.length-2])
+//     mostrarEstudiantesEnLista();
+//     mostrarPorcentaje();
+//     obtenerSesionTemporal();
+//     document.getElementById("botonAOREstudiante").onclick = () => {aprobarOReprobar()};
+//     document.getElementById("estudiantesInscripto").onclick = () => {statusEnCombo()};
+//     document.getElementById("botonBorrarEstudiante").onclick = () => {borrarEstudiante()};
+// }
+

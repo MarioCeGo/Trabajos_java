@@ -1,33 +1,4 @@
-
-
-function crearCuenta(){
-    let form = document.getElementById("formCrearAbrirCuenta");
-    let validarCuentaExistente = (sistema.validarCuentaExistente(document.getElementById("emailCrearIniciarCuenta").value) === undefined ) ? true : false ;
-
-    if(validarCuentaExistente && form.reportValidity()){
-        let email = document.getElementById("emailCrearIniciarCuenta").value;
-        let password = document.getElementById("passwordCrearIniciarCuenta").value;
-
-        let profesor = new Profesor("","","","",email, password,"");
-        sistema.agregarCuentaProfesor(profesor);
-        registrarProfesor(profesor);
-    }else if(!validarCuentaExistente){
-        alert("La cuenta ya existe");
-    }
-
-}
-
-function iniciarSesion(){
-    let form = document.getElementById("formCrearAbrirCuenta");
-    let email = document.getElementById("emailCrearIniciarCuenta").value;
-    let password = document.getElementById("passwordCrearIniciarCuenta").value;
-    if(form.reportValidity()){
-        iniciarCuentaProfesore(email, password);
-        cerrarModal();
-    }else if(!validacionInicio) {
-        alert("Algo salio mal mi amigo");
-    }
-}
+const modal = document.getElementById("modal");
 
 function ventanaInfo(tipo, dato){
     modal.className = "modal";
@@ -80,3 +51,51 @@ function cerrarModal(){
     modal.className = "";
 }
 
+function mostrarToastify(tipo, estudiante){
+    if(tipo == "REPROBO"){
+        Toastify({
+            text: `${estudiante.primerNombre} ${estudiante.primerApellido} reprobó el curso`,
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#f44336"
+            }
+        }).showToast();
+    }else if(tipo == "APROBO"){
+        Toastify({
+            text: `${estudiante.primerNombre} ${estudiante.primerApellido} aprobó el curso`,
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#4CAF50"
+            }
+        }).showToast();        
+    }else if(tipo == "ASE"){
+        //ASE -> Aviso Seleccione Estudiante
+        Toastify({
+            text: "Seleccione estudiante!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();
+    }else if(tipo == "INSCRIPTO"){
+        Toastify({
+            text: "Estudiante inscripto!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();
+    }else if(tipo == "ELIMINADO"){
+        Toastify({
+            text: "Estudiante eliminado",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#f44336"
+            }
+        }).showToast();
+    }
+}

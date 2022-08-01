@@ -1,5 +1,10 @@
-node_modules
-package-lock.json
-package.json
-js/funcionesComple.js
-scss
+/node_modules
+/.vscode
+/package.json
+/package-lock.json
+/js/API
+/js/crearCuenta.js
+/scss
+/js/estudiantesAPI.js
+/js/examen.js
+/js/funcionesComple.js

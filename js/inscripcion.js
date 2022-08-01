@@ -10,19 +10,34 @@ const fechaNacimiento = document.getElementById("fechaNacimientoEstudianteInscri
 const listaEstudiantesInscripto = document.getElementById("listaEstudiantesInscripto");
 const btnFormAE = document.getElementById("btnFormAE");
 
-// function crearEstudiante(){
-//     let validarEstudiante = (sistema.buscarEstudianteXCedula(cedula.value) === undefined ) ? true : false;
-//     if(validarEstudiante && form.reportValidity()){
-//         let estudiante = new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value);
-//         sistema.agregarEstudiante(estudiante);
-//         registrarEstudiante(estudiante);
-//         sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
-//         form.reset();
+function crearEstudiante(){
+    let validarEstudiante = (sistema.buscarEstudianteXCedula(cedula.value) === undefined ) ? true : false;
+    if(validarEstudiante && form.reportValidity()){
+        let estudiante = new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value);
+        sistema.agregarEstudiante(estudiante);
+        registrarEstudiante(estudiante);
+        sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
+        form.reset();
         
-//     }else if(!validarEstudiante){
-//         ventanaInfo("ADVERTENCIA");
-//     }
-// }
+    }else if(!validarEstudiante){
+        ventanaInfo("ADVERTENCIA");
+    }
+}
+
+function registrarEstudiante(estudiante){
+    fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes",{
+        method: "POST",
+        body: JSON.stringify(estudiante),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then((resp) => resp.json())
+    .then((data) => {
+        mostrarToastify("INSCRIPTO");
+        mostrarEstudiantesInscripto();
+    })
+}
 
 function mostrarEstudiantesInscripto(){
     listaEstudiantesInscripto.innerHTML = "";
@@ -33,39 +48,11 @@ function mostrarEstudiantesInscripto(){
     }
 }
 
-function inicioInscripcion(){
-    // let resp = await fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes");
-    // let data = await resp.json();
-    // sistema.listaEstudiantes = [...data].sort((a,b) => {return (a.primerApellido).localeCompare(b.primerApellido)});
-    obtenerSesionTemporal();
-    inicioSesion[inicioSesion.length-1] ? "" : obtenerEstudiantes();
-    mostrarEstudiantesInscripto();
-    obtenerSesionTemporal();
+async function inicioInscripcion(){
+    let resp = await fetch("https://62e2a74fb54fc209b87df028.mockapi.io/estudiantes");
+    let data = await resp.json();
+    sistema.listaEstudiantes = [...data].sort((a,b) => {return (a.primerApellido).localeCompare(b.primerApellido)});
+    sistema.listaEstudiantes.length != 0 ?mostrarEstudiantesInscripto() : false ;
     sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;
     document.getElementById("inscribirEstudiante").onclick = () => {crearEstudiante()};
-}
-
-
-
-
-
-
-function crearEstudiante(){
-    let validarEstudiante = (sistema.buscarEstudianteXCedula(cedula.value) === undefined ) ? true : false;
-    if(validarEstudiante && form.reportValidity()){
-        let estudiante = new Estudiante(primeraMayuscula(primerNombre.value), primeraMayuscula(segundoNombre.value), primeraMayuscula(primerApellido.value), primeraMayuscula(segundoApellido.value), cedula.value, fechaNacimiento.value);
-        if(inicioSesion[inicioSesion.length-1]){
-            inicioSesion[inicioSesion.length-2].push(estudiante);
-            registrarEstudianteProfesor();
-        }else{
-            sistema.agregarEstudiante(estudiante);
-            //listaEstudiantesInscripto();
-            guardarEstudiantes();
-            mostrarEstudiantesInscripto();
-            sistema.listaEstudiantes.length>0 ? (btnFormAE.className = "btn btn-tertiary") : false ;          
-        }   
-        form.reset();
-    }else if(!validarEstudiante){
-        ventanaInfo("ADVERTENCIA");
-    }
 }
